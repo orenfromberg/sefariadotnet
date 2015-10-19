@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Api\Endpoints.cs" />
     <Compile Include="Clients\TextClient.cs" />
-    <Compile Include="Common\Unmarshaller.cs" />
     <Compile Include="Http\AsyncResponseReceivedEventArgs.cs" />
     <Compile Include="Http\ResponseReceivedEventArgs.cs" />
     <Compile Include="Http\WebRequest.cs" />

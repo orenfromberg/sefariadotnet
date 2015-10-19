@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using com.sefaria.api.Common;
+using Newtonsoft.Json;
 using Text = com.sefaria.api.Texts.Text;
 using Endpoints = com.sefaria.api.Api.Endpoints;
 namespace com.sefaria.api.Clients
@@ -14,7 +10,11 @@ namespace com.sefaria.api.Clients
 		{
 			String getUrl = String.Format("{0}/{1}", Endpoints.Text, id);
 			String json = Http.WebRequest.SendGet(new Uri(getUrl));
-			return Unmarshaller<Text>.Unmarshal(json);
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<Text>(json);
 		}
 	}
 }
