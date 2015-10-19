@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Text = com.sefaria.api.Texts.Text;
 using Endpoints = com.sefaria.api.Api.Endpoints;
+
 namespace com.sefaria.api.Clients
 {
 	public class TextClient
