@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using com.sefaria.api.Clients;
 using Sefaria = com.sefaria.api;
 
@@ -14,12 +11,27 @@ namespace ConsoleApplication1
 		{
 			var client = new TextClient();
 
-			const string name = "Kohelet.5";
+			while(true)
+			{
+				Console.Write("> ");
+				string input = Console.ReadLine();
+				if (input != null && input.Equals("quit"))
+					break;
 
-			var text = client.GetText(name);
-
-			return;
-
+				try
+				{
+					var text = client.GetText(input);
+					for (int i = 0; i < text.TextStrings.Count; i++)
+					{
+						Console.WriteLine(text.TextStrings[i]);
+						Debug.WriteLine(text.HebrewTextStrings[i]);
+					}
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e);
+				}
+			}
 		}
 	}
 }
