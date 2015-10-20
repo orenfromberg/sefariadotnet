@@ -5,6 +5,11 @@ using Newtonsoft.Json.Linq;
 
 namespace com.sefaria.api.Common
 {
+	/// <summary>
+	/// taken from:
+	/// http://stackoverflow.com/questions/18994685/how-to-handle-both-a-single-item-and-an-array-for-the-same-property-using-json-n/18997172#18997172
+	/// </summary>
+	/// <typeparam name="T">type of single or array to be converted</typeparam>
 	class SingleOrArrayConverter<T> : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
