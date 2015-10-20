@@ -18,7 +18,6 @@ namespace com.sefaria.api.Texts
 		[JsonConverter(typeof(SingleOrArrayConverter<string>))]
 		public List<String> HebrewTextStrings { get; set; }
 
-
 		[JsonProperty("heTitleVariants")]
 		[JsonConverter(typeof(SingleOrArrayConverter<string>))]
 		public List<String> HebrewTitleVariantsStrings { get; set; }
