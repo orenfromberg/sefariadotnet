@@ -21,10 +21,10 @@ namespace ConsoleApplication1
 				try
 				{
 					var text = client.GetText(input);
-					for (int i = 0; i < text.TextStrings.Count; i++)
+					for (int i = 0; i < text.TextList.Count; i++)
 					{
-						Console.WriteLine(text.TextStrings[i]);
-						Debug.WriteLine(text.HebrewTextStrings[i]);
+						Console.WriteLine(text.TextList[i]);
+						Debug.WriteLine(text.HebrewTextList[i]);
 					}
 				}
 				catch (Exception e)
