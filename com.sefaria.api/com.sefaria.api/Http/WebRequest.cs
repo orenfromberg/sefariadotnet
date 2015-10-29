@@ -1,4 +1,40 @@
-﻿using System;
+﻿#region Copyright (C) 2014 Sascha Simon
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+//  Visit the official homepage at http://www.sascha-simon.com
+
+#endregion
+
+#region Copyright (C) 2015 Oren Fromberg
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+
+#endregion
+
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +51,7 @@ namespace com.sefaria.api.Http
 		/// The Response Code that was received on the last request.
 		/// </summary>
 		public static HttpStatusCode LastResponseCode { get; set; }
+
 		/// <summary>
 		/// AsyncResponseReceived is raised when an asynchronous response is received from the server.
 		/// </summary>
@@ -73,7 +110,7 @@ namespace com.sefaria.api.Http
 				throw new ArgumentException("Parameter uri must not be null. Please commit a valid Uri object.");
 			}
 
-			using (HttpClient httpClient = new HttpClient())
+			using (var httpClient = new HttpClient())
 			{
 				using (HttpResponseMessage response = await httpClient.PostAsync(uri, null))
 				{
@@ -137,11 +174,10 @@ namespace com.sefaria.api.Http
 				throw new ArgumentException("Parameter uri must not be null. Please commit a valid Uri object.");
 			}
 
-			using (HttpClient httpClient = new HttpClient())
+			using (var httpClient = new HttpClient())
 			{
 				using (HttpResponseMessage response = await httpClient.DeleteAsync(uri))
 				{
-
 					if (response != null)
 					{
 						if (AsyncResponseReceived != null)
@@ -165,32 +201,30 @@ namespace com.sefaria.api.Http
 		/// <returns>The server's response.</returns>
 		public static String SendGet(Uri uri)
 		{
-			HttpWebRequest httpRequest = (HttpWebRequest)System.Net.WebRequest.Create(uri);
+			var httpRequest = (HttpWebRequest)System.Net.WebRequest.Create(uri);
 			httpRequest.Method = "GET";
 
-			using (HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse())
+			using (var httpResponse = (HttpWebResponse)httpRequest.GetResponse())
 			{
 				Stream responseStream = httpResponse.GetResponseStream();
 
-				if (responseStream != null)
+				if (responseStream == null) 
+					return String.Empty;
+
+				if (ResponseReceived != null)
 				{
-					if (ResponseReceived != null)
-					{
-						ResponseReceived(null, new ResponseReceivedEventArgs(httpResponse));
-					}
-
-					StreamReader reader = new StreamReader(responseStream);
-					String response = reader.ReadToEnd();
-
-					// Close both streams.
-					reader.Close();
-					responseStream.Close();
-
-					return response;
+					ResponseReceived(null, new ResponseReceivedEventArgs(httpResponse));
 				}
-			}
 
-			return String.Empty;
+				var reader = new StreamReader(responseStream);
+				String response = reader.ReadToEnd();
+
+				// Close both streams.
+				reader.Close();
+				responseStream.Close();
+
+				return response;
+			}
 		}
 
 		/// <summary>
@@ -200,33 +234,30 @@ namespace com.sefaria.api.Http
 		/// <returns>The server's response.</returns>
 		public static String SendPut(Uri uri)
 		{
-			HttpWebRequest httpRequest = (HttpWebRequest)System.Net.WebRequest.Create(uri);
+			var httpRequest = (HttpWebRequest)System.Net.WebRequest.Create(uri);
 			httpRequest.Method = "PUT";
 
-			using (HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse())
+			using (var httpResponse = (HttpWebResponse)httpRequest.GetResponse())
 			{
 				Stream responseStream = httpResponse.GetResponseStream();
 
-				if (responseStream != null)
+				if (responseStream == null)
+					return String.Empty;
+
+				if (ResponseReceived != null)
 				{
-					if (ResponseReceived != null)
-					{
-						ResponseReceived(null, new ResponseReceivedEventArgs(httpResponse));
-					}
-
-					StreamReader reader = new StreamReader(responseStream);
-					String response = reader.ReadToEnd();
-
-					// Close both streams.
-					reader.Close();
-					responseStream.Close();
-
-					return response;
+					ResponseReceived(null, new ResponseReceivedEventArgs(httpResponse));
 				}
+
+				var reader = new StreamReader(responseStream);
+				String response = reader.ReadToEnd();
+
+				// Close both streams.
+				reader.Close();
+				responseStream.Close();
+
+				return response;
 			}
-
-			return String.Empty;
 		}
-
 	}
 }

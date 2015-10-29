@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>498979f0-046d-4161-b8f4-993e42e7d62b</ProjectGuid>
+    <ProjectGuid>{F0C8EF8C-24C3-480E-9427-BE1998B183AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>com.sefaria.api.tests</RootNamespace>
