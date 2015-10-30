@@ -18,7 +18,7 @@
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Text = com.sefaria.api.Texts.Text;
+using Text = com.sefaria.api.Models.Text;
 using Endpoints = com.sefaria.api.Api.Endpoints;
 
 namespace com.sefaria.api.Clients

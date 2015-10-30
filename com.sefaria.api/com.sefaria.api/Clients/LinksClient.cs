@@ -16,17 +16,23 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using com.sefaria.api.Api;
+using com.sefaria.api.Models;
+using Newtonsoft.Json;
 
-namespace com.sefaria.api.Api
+namespace com.sefaria.api.Clients
 {
-	public static class Endpoints
+	public class LinksClient
 	{
-		public const String Text = "http://www.sefaria.org/api/texts";
-
-		public const String Index = "http://www.sefaria.org/api/index";
-
-		public const String Titles = "http://www.sefaria.org/api/index/titles";
-
-		public const String Links = "http://www.sefaria.org/api/links";
+		public List<Link> GetLinks(string reference)
+		{
+			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}/{1}", Endpoints.Links, reference)));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<List<Link>>(json);			
+		}
 	}
 }

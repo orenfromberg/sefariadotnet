@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using com.sefaria.api.Common;
 using Newtonsoft.Json;
 
-namespace com.sefaria.api.Texts
+namespace com.sefaria.api.Models
 {
 	/// <summary>
 	/// 

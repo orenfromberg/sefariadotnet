@@ -18,7 +18,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace com.sefaria.api.Texts
+namespace com.sefaria.api.Models
 {
 	public class Version
 	{

@@ -61,18 +61,25 @@ namespace ConsoleApplication1
 				try
 				{
 					var text = client.Texts.GetText(input);
-
+					var links = client.Links.GetLinks(input);
 					if (text.Error != null)
 					{
 						Console.WriteLine(text.Error);
 					}
 					else
 					{
+						// texts
 						for (int i = 0; i < text.TextList.Count; i++)
 						{
 							Console.WriteLine(text.TextList[i]);
 							Debug.WriteLine(text.HebrewTextList[i]);
-						}						
+						}	
+					
+						// links
+						foreach (var link in links)
+						{
+							Console.WriteLine(link.Ref);
+						}
 					}
 				}
 				catch (Exception e)

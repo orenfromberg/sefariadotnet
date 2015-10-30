@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using com.sefaria.api.Api;
-using com.sefaria.api.Texts;
+using com.sefaria.api.Models;
 using Newtonsoft.Json;
 
 namespace com.sefaria.api.Clients
@@ -27,7 +27,7 @@ namespace com.sefaria.api.Clients
 	{
 		public Index GetTitles()
 		{
-			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.IndexTitles)));
+			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.Titles)));
 			if (String.IsNullOrEmpty(json))
 			{
 				throw new ArgumentException("the json string is null or empty.");

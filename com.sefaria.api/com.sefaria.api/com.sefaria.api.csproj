@@ -46,17 +46,19 @@
   <ItemGroup>
     <Compile Include="Api\Endpoints.cs" />
     <Compile Include="Clients\IndexClient.cs" />
+    <Compile Include="Clients\LinksClient.cs" />
     <Compile Include="Clients\SefariaClient.cs" />
     <Compile Include="Clients\TextClient.cs" />
     <Compile Include="Http\AsyncResponseReceivedEventArgs.cs" />
     <Compile Include="Http\ResponseReceivedEventArgs.cs" />
     <Compile Include="Http\WebRequest.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\SingleOrArrayConverter.cs" />
-    <Compile Include="Texts\Commentary.cs" />
-    <Compile Include="Texts\Index.cs" />
-    <Compile Include="Texts\Text.cs" />
-    <Compile Include="Texts\Version.cs" />
+    <Compile Include="Models\Commentary.cs" />
+    <Compile Include="Models\Index.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
