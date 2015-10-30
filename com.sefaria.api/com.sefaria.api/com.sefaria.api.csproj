@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Api\Endpoints.cs" />
     <Compile Include="Clients\IndexClient.cs" />
+    <Compile Include="Clients\SefariaClient.cs" />
     <Compile Include="Clients\TextClient.cs" />
     <Compile Include="Http\AsyncResponseReceivedEventArgs.cs" />
     <Compile Include="Http\ResponseReceivedEventArgs.cs" />

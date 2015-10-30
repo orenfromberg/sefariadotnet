@@ -1,4 +1,21 @@
-﻿using System;
+﻿#region Copyright (C) 2015 Oren Fromberg
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+
+#endregion
+
+using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Text = com.sefaria.api.Texts.Text;
@@ -12,7 +29,7 @@ namespace com.sefaria.api.Clients
 
 		public bool HasContext { get; set; }
 
-		public TextClient(bool hasCommentary = false, bool hasContext = false)
+		public TextClient(bool hasCommentary, bool hasContext)
 		{
 			HasCommentary = hasCommentary;
 			HasContext = hasContext;
