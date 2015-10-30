@@ -1,5 +1,4 @@
 # sefariadotnet
-=============
 
 Small framework for sefaria api.
 

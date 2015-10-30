@@ -28,6 +28,13 @@ namespace com.sefaria.api.Texts
 	public class Text
 	{
 		/// <summary>
+		/// The error
+		/// </summary>
+		[JsonProperty("error")]
+		public String Error { get; set; }
+
+
+		/// <summary>
 		/// The name of the requested text, normalized to the name 
 		/// considered primary. Hence "Kohelet" becomes "Eccelesiates".
 		/// </summary>

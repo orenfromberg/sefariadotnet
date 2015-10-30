@@ -38,10 +38,18 @@ namespace ConsoleApplication1
 				try
 				{
 					var text = client.Texts.GetText(input);
-					for (int i = 0; i < text.TextList.Count; i++)
+
+					if (text.Error != null)
 					{
-						Console.WriteLine(text.TextList[i]);
-						Debug.WriteLine(text.HebrewTextList[i]);
+						Console.WriteLine(text.Error);
+					}
+					else
+					{
+						for (int i = 0; i < text.TextList.Count; i++)
+						{
+							Console.WriteLine(text.TextList[i]);
+							Debug.WriteLine(text.HebrewTextList[i]);
+						}						
 					}
 				}
 				catch (Exception e)

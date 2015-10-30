@@ -74,6 +74,5 @@ namespace com.sefaria.api.Clients
 			}
 			return JsonConvert.DeserializeObject<Text>(json);
 		}
-
 	}
 }

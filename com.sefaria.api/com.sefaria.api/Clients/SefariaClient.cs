@@ -24,15 +24,17 @@ namespace com.sefaria.api.Clients
 	/// </summary>
 	public class SefariaClient
 	{
-		#region Private Fields
-
-		private bool _hasCommentary;
-
-		private bool _hasContext;
-
-		#endregion
-
 		#region Public Properties
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool HasCommentary { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool HasContext { get; set; }
 
 		/// <summary>
 		/// 
@@ -53,10 +55,10 @@ namespace com.sefaria.api.Clients
 		/// <param name="hasContext"></param>
 		public SefariaClient(bool hasCommentary = false, bool hasContext = false)
 		{
-			_hasCommentary = hasCommentary;
-			_hasContext = hasContext;
+			HasCommentary = hasCommentary;
+			HasContext = hasContext;
 
-			Texts = new TextClient(hasCommentary, hasContext);
+			Texts = new TextClient(HasCommentary, HasContext);
 			Indices = new IndexClient();
 		}
 
