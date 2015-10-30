@@ -32,8 +32,31 @@ namespace ConsoleApplication1
 			{
 				Console.Write("> ");
 				string input = Console.ReadLine();
-				if (input != null && input.Equals("quit"))
-					break;
+				if (input != null)
+				{
+					if (input.Equals("quit"))
+						break;
+
+					if (input.Equals("titles"))
+					{
+						var index = client.Index.GetTitles();
+						foreach (var title in index.Books)
+						{
+							Console.WriteLine(title);
+						}
+						continue;
+					}
+
+					if (input.Equals("contents"))
+					{
+						var indices = client.Index.GetContents();
+						//todo print out index
+						Console.WriteLine(indices.ToString());
+						continue;
+					}
+
+					// todo output specific indices (e.g. genesis)
+				}
 
 				try
 				{

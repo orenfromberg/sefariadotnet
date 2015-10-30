@@ -44,7 +44,7 @@ namespace com.sefaria.api.Clients
 		/// <summary>
 		/// 
 		/// </summary>
-		public IndexClient Indices { get; set; }
+		public IndexClient Index { get; set; }
 
 		#endregion
 
@@ -59,7 +59,7 @@ namespace com.sefaria.api.Clients
 			HasContext = hasContext;
 
 			Texts = new TextClient(HasCommentary, HasContext);
-			Indices = new IndexClient();
+			Index = new IndexClient();
 		}
 
 		/// <summary>

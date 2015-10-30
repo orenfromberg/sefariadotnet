@@ -16,6 +16,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using com.sefaria.api.Api;
 using com.sefaria.api.Texts;
 using Newtonsoft.Json;
@@ -24,14 +25,38 @@ namespace com.sefaria.api.Clients
 {
 	public class IndexClient
 	{
-		public Index GetIndex()
+		public Index GetTitles()
 		{
-			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.Index)));
+			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.IndexTitles)));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<Index>(json);			
+		}
+
+		public List<Index> GetContents()
+		{
+			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.Index )));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<List<Index>>(json);
+
+			//todo handle json exceptions here
+		}
+
+		public Index GetIndex(String reference)
+		{
+			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}/{1}", Endpoints.Index, reference)));
 			if (String.IsNullOrEmpty(json))
 			{
 				throw new ArgumentException("the json string is null or empty.");
 			}
 			return JsonConvert.DeserializeObject<Index>(json);
+
+			//todo handle json exceptions here
 		}
 	}
 }
