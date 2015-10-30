@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using com.sefaria.api.Api;
 using com.sefaria.api.Models;
 using Newtonsoft.Json;
@@ -25,6 +26,16 @@ namespace com.sefaria.api.Clients
 {
 	public class IndexClient
 	{
+		public async Task<Index> GetTitlesAsync()
+		{
+			String json = await Http.WebRequest.SendGetAsync(new Uri(String.Format("{0}", Endpoints.Titles)));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<Index>(json);
+		}
+
 		public Index GetTitles()
 		{
 			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.Titles)));
@@ -35,6 +46,18 @@ namespace com.sefaria.api.Clients
 			return JsonConvert.DeserializeObject<Index>(json);			
 		}
 
+		public async Task<List<Index>> GetContentsAsync()
+		{
+			String json = await Http.WebRequest.SendGetAsync(new Uri(String.Format("{0}", Endpoints.Index)));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<List<Index>>(json);
+
+			//todo handle json exceptions here
+		}
+
 		public List<Index> GetContents()
 		{
 			String json = Http.WebRequest.SendGet(new Uri(String.Format("{0}", Endpoints.Index )));
@@ -43,6 +66,18 @@ namespace com.sefaria.api.Clients
 				throw new ArgumentException("the json string is null or empty.");
 			}
 			return JsonConvert.DeserializeObject<List<Index>>(json);
+
+			//todo handle json exceptions here
+		}
+
+		public async Task<Index> GetIndexAsync(String reference)
+		{
+			String json = await Http.WebRequest.SendGetAsync(new Uri(String.Format("{0}/{1}", Endpoints.Index, reference)));
+			if (String.IsNullOrEmpty(json))
+			{
+				throw new ArgumentException("the json string is null or empty.");
+			}
+			return JsonConvert.DeserializeObject<Index>(json);
 
 			//todo handle json exceptions here
 		}
