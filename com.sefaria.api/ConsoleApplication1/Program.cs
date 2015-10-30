@@ -22,11 +22,16 @@ using Sefaria = com.sefaria.api;
 
 namespace ConsoleApplication1
 {
+	/// <summary>
+	/// test program. once there is a nuget package, i'll remove this from the repo.
+	/// </summary>
 	class Program
 	{
 		static void Main(string[] args)
 		{
 			var client = new SefariaClient();
+
+			Console.WriteLine(client.ToString());
 
 			while(true)
 			{
