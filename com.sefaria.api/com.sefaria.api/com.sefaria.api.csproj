@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Endpoints.cs" />
+    <Compile Include="Authentication\StaticAuthentication.cs" />
+    <Compile Include="Clients\BaseClient.cs" />
+    <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="Clients\IndexClient.cs" />
     <Compile Include="Clients\LinksClient.cs" />
     <Compile Include="Clients\SefariaClient.cs" />

@@ -15,6 +15,8 @@
 
 #endregion
 
+#define NO_AUTH
+
 using System;
 using System.Diagnostics;
 using com.sefaria.api.Clients;
@@ -29,11 +31,14 @@ namespace ConsoleApplication1
 	{
 		static void Main(string[] args)
 		{
+#if NO_AUTH
+			// not using SefariaClient
+#else
 			var client = new SefariaClient();
-
 			Console.WriteLine(client.ToString());
+#endif
 
-			while(true)
+			while (true)
 			{
 				Console.Write("> ");
 				string input = Console.ReadLine();
@@ -44,7 +49,11 @@ namespace ConsoleApplication1
 
 					if (input.Equals("titles"))
 					{
+#if NO_AUTH
+						var index = IndexClient.GetTitles();
+#else
 						var index = client.Index.GetTitles();
+#endif
 						foreach (var title in index.Books)
 						{
 							Console.WriteLine(title);
@@ -54,7 +63,11 @@ namespace ConsoleApplication1
 
 					if (input.Equals("contents"))
 					{
+#if NO_AUTH
+						var indices = IndexClient.GetContents();
+#else
 						var indices = client.Index.GetContents();
+#endif
 						//todo print out index
 						Console.WriteLine(indices.ToString());
 						continue;
@@ -65,8 +78,13 @@ namespace ConsoleApplication1
 
 				try
 				{
+#if NO_AUTH
+					var text = TextClient.GetText(input, false, false);
+					var links = LinksClient.GetLinks(input);
+#else
 					var text = client.Texts.GetText(input);
 					var links = client.Links.GetLinks(input);
+#endif
 					if (text.Error != null)
 					{
 						Console.WriteLine(text.Error);

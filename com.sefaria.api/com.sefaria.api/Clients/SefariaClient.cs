@@ -16,6 +16,7 @@
 #endregion
 
 using System.Reflection;
+using com.sefaria.api.Authentication;
 
 namespace com.sefaria.api.Clients
 {
@@ -24,6 +25,12 @@ namespace com.sefaria.api.Clients
 	/// </summary>
 	public class SefariaClient
 	{
+		#region Private Fields
+
+		private IAuthentication _authenticator;
+
+		#endregion
+
 		#region Public Properties
 
 		/// <summary>
@@ -56,16 +63,27 @@ namespace com.sefaria.api.Clients
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="authenticator"></param>
+		public SefariaClient(IAuthentication authenticator)
+			:this(authenticator, false, false)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="authenticator"></param>
 		/// <param name="hasCommentary"></param>
 		/// <param name="hasContext"></param>
-		public SefariaClient(bool hasCommentary = false, bool hasContext = false)
+		public SefariaClient(IAuthentication authenticator, bool hasCommentary, bool hasContext)
 		{
 			HasCommentary = hasCommentary;
 			HasContext = hasContext;
+			_authenticator = authenticator;
 
-			Texts = new TextClient(HasCommentary, HasContext);
-			Index = new IndexClient();
-			Links = new LinksClient();
+			Texts = new TextClient(authenticator, HasCommentary, HasContext);
+			Index = new IndexClient(authenticator);
+			Links = new LinksClient(authenticator);
 		}
 
 		/// <summary>
